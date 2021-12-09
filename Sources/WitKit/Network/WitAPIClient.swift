@@ -26,7 +26,7 @@ public extension WitAPIClient {
         let task = session.dataTask(with: request) { data, response, error in
             guard let httpResponse = response as? HTTPURLResponse else {
                 completion(nil, .requestFailed)
-                semaphore.signal()
+//                semaphore.signal()
                 return
             }
             if httpResponse.statusCode == 200 {
@@ -34,18 +34,18 @@ public extension WitAPIClient {
                     do {
                         let genericModel = try JSONDecoder().decode(decodingType, from: data)
                         completion(genericModel, nil)
-                        semaphore.signal()
+//                        semaphore.signal()
                     } catch {
                         completion(nil, .jsonConversionFailure)
-                        semaphore.signal()
+//                        semaphore.signal()
                     }
                 } else {
                     completion(nil, .invalidData)
-                    semaphore.signal()
+//                    semaphore.signal()
                 }
             } else {
                 completion(nil, .responseUnsuccessful)
-                semaphore.signal()
+//                semaphore.signal()
             }
         }
         return task
@@ -56,24 +56,24 @@ public extension WitAPIClient {
             guard let json = json else {
                 if let error = error {
                     completion(WitResult.failure(error))
-                    semaphore.signal()
+//                    semaphore.signal()
                 } else {
                     completion(WitResult.failure(.invalidData))
-                    semaphore.signal()
+//                    semaphore.signal()
                 }
                 return
             }
             if let value = decode(json) {
                 completion(.success(value))
-                semaphore.signal()
+//                semaphore.signal()
             } else {
                 completion(.failure(.jsonParsingFailure))
-                semaphore.signal()
+//                semaphore.signal()
             }
-            semaphore.signal()
+//            semaphore.signal()
         }
         task.resume()
-        semaphore.wait()
+//        semaphore.wait()
     }
     
 }

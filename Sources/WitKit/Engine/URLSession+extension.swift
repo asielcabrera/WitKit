@@ -22,15 +22,15 @@ extension URLSession {
             // Reject or resolve the promise, depending on the result:
             if let error = error {
                 promise.reject(with: error)
-                self?.semaphore.signal()
+//                self?.semaphore.signal()
             } else {
                 promise.resolve(with: data ?? Data())
-                self?.semaphore.signal()
+//                self?.semaphore.signal()
             }
         }
         
         task.resume()
-        semaphore.wait()
+//        semaphore.wait()
         return promise
     }
     
@@ -45,17 +45,17 @@ extension URLSession {
             // Reject or resolve the promise, depending on the result:
             if let error = error {
                 promise.reject(with: error)
-                self?.semaphore.signal()
+//                self?.semaphore.signal()
             } else {
                 print("resolver urlsession")
                 promise.resolve(with: data!)
-                self?.semaphore.signal()
+//                self?.semaphore.signal()
             }
-            self?.semaphore.signal()
+//            self?.semaphore.signal()
         }
 
         task.resume()
-        semaphore.wait()
+//        semaphore.wait()
         
         return promise
     }    
