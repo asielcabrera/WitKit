@@ -58,17 +58,5 @@ extension URLSession {
         semaphore.wait()
         
         return promise
-    }
-    
-    
-    @available(macOS 10.15, *)
-    func requestPrueba(urlRequest: URLRequest) -> AnyPublisher<WitMessage, Error> {
-        dataTaskPublisher(for: urlRequest)
-            .map(\.data)
-            .decode(type: WitMessage.self, decoder: JSONDecoder())
-            .print()
-            .eraseToAnyPublisher()
-    }
-    
-    
+    }    
 }
