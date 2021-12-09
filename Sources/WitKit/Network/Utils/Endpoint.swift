@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import AsyncHTTPClient
+//import AsyncHTTPClient
 
 public protocol Endpoint {
     
@@ -32,13 +32,5 @@ public extension Endpoint {
         req.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
         req.httpMethod = "GET"
         return req
-    }
-    
-    
-    func requestAsyc(token: String, witVersion: String) -> HTTPClient.Request {
-        var req = try? HTTPClient.Request(url: urlString)
-        req?.headers.add(name: "Accept", value: "application/vnd.wit.\(witVersion)+json")
-        req?.headers.add(name: "Authorization", value: "Bearer \(token)")
-        return req!
     }
 }
