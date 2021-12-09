@@ -23,4 +23,9 @@ public class WitClient: WitAPIClient {
             return message
         }, completion: completion)
     }
+    
+    public func messageAsync<T:Decodable>(_ message: Message) -> Future<T> {
+        session.request(urlRequest: message.request(token: token, witVersion: "20211206"))
+            .decoded(as: T.self, using: .init())
+    }
 }
