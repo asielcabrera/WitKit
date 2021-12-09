@@ -10,6 +10,7 @@ let package = Package(
         .library(
             name: "WitKit",
             targets: ["WitKit"]),
+        .executable(name: "Run", targets: ["Run"])
     ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
@@ -21,6 +22,7 @@ let package = Package(
         .target(
             name: "WitKit",
             dependencies: []),
+        .executableTarget(name: "Run", dependencies: ["WitKit"]),
         .testTarget(
             name: "WitKitTests",
             dependencies: ["WitKit"]),
