@@ -20,7 +20,6 @@ public extension Future {
             switch result {
             case .success(let value):
                 do {
-                    print("chained----\(value)")
                     // Attempt to construct a new future using the value
                     // returned from the first one:
                     let future = try closure(value)

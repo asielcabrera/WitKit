@@ -21,10 +21,8 @@ public class Future<Value> {
     public func observe(using callback: @escaping (Result) -> Void) {
         // If a result has already been set, call the callback directly:
         if let result = result {
-            print("result --- \(result)")
             return callback(result)
         }
-        print("no result")
         callbacks.append(callback)
     }
     

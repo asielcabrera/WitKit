@@ -14,7 +14,6 @@ public extension Future where Value == Data {
         using decoder: JSONDecoder = .init()
     ) -> Future<T> {
         transformed { data in
-            print(data)
             return try decoder.decode(T.self, from: data)
         }
     }
