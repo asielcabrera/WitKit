@@ -44,7 +44,6 @@ public extension Future where Value: Decodable {
             database.save(value) {
                 promise.resolve(with: value)
             }
-            //      print("saved-----\(value)")
             
             return promise
         }
@@ -53,7 +52,7 @@ public extension Future where Value: Decodable {
 
 
 public protocol Database {
-    public func save<T: Decodable> (_ value: T, completion: @escaping (T) -> () ) -> Void
+    func save<T: Decodable> (_ value: T, completion: @escaping () -> () ) -> Void
 }
 
 //public class Database {
