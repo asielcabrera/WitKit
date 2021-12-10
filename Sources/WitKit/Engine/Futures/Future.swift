@@ -37,35 +37,30 @@ public class Future<Value> {
 
 
 public extension Future where Value: Decodable {
-    func saved(in database: Database) -> Future<Value> {
+    func saved<Savable: Database>(in database: Savable) -> Future<Value> {
         chained { value in
             let promise = Promise<Value>()
-//
-//            database.save(value) {
-//
-//            }
-            print("saved-----\(value)")
-            promise.resolve(with: value)
+            
+            database.save(value) {
+                promise.resolve(with: value)
+            }
+            //      print("saved-----\(value)")
             
             return promise
         }
     }
 }
 
-//public extension Future {
-//    func siempre<T>(closure: @escaping (Value) throws -> Future<T>)->Future<T> {
-//        let promise = Promise<T>()
+
+public protocol Database {
+    public func save<T: Decodable> (_ value: T, completion: @escaping (T) -> () ) -> Void
+}
+
+//public class Database {
+//    public init() {}
+//
+//    public func save<T: Decodable> (_ value: T, completion: @escaping (T) -> ()) -> Void{
+//        print(value)
+//        return completion()
 //    }
 //}
-
-
-
-
-public class Database {
-    public init() {}
-    
-    public func save<T: Decodable> (_ value: T, completion: @escaping () -> ()) -> Void{
-        print(value)
-        return completion()
-    }
-}
