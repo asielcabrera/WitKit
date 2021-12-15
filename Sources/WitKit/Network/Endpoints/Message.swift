@@ -21,7 +21,6 @@ extension Message: Endpoint {
     
     public var query: String {
         switch self {
-            
             case .basic(let text):
                 let message = text.replacingOccurrences(of: " ", with: "%20")
                 return "q=\(message)"
