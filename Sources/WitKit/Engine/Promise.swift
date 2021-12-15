@@ -17,13 +17,10 @@ public class Promise<Value>: Future<Value> {
     }
     
     public func resolve(with value: Value) {
-        print("calling promise resolve")
-//        print(value)
         result = .success(value)
     }
     
     public func reject(with error: Error) {
-        print("calling promise reject")
         result = .failure(error)
     }
 }

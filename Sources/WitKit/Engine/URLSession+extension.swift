@@ -6,31 +6,24 @@
 //
 
 import Foundation
-import Combine
 
 extension URLSession {
-    
-    private var semaphore: DispatchSemaphore { return DispatchSemaphore (value: 0) }
-    
     func request(url: URL) -> Future<Data> {
         // We'll start by constructing a Promise, that will later be
         // returned as a Future:
         let promise = Promise<Data>()
         
         // Perform a data task, just like we normally would:
-        let task = dataTask(with: url) { [weak self] data, _, error in
+        let task = dataTask(with: url) { data, _, error in
             // Reject or resolve the promise, depending on the result:
             if let error = error {
                 promise.reject(with: error)
-//                self?.semaphore.signal()
             } else {
                 promise.resolve(with: data ?? Data())
-//                self?.semaphore.signal()
             }
         }
         
         task.resume()
-//        semaphore.wait()
         return promise
     }
     
@@ -40,23 +33,16 @@ extension URLSession {
         let promise = Promise<Data>()
         
         // Perform a data task, just like we normally would:
-        let task = dataTask(with: urlRequest) { [weak self] data, _, error in
-            print(String(data: data!, encoding: .utf8)!)
+        let task = dataTask(with: urlRequest) { data, _, error in
             // Reject or resolve the promise, depending on the result:
             if let error = error {
                 promise.reject(with: error)
-//                self?.semaphore.signal()
             } else {
-                print("resolver urlsession")
                 promise.resolve(with: data!)
-//                self?.semaphore.signal()
             }
-//            self?.semaphore.signal()
         }
 
         task.resume()
-//        semaphore.wait()
-        
         return promise
     }    
 }
