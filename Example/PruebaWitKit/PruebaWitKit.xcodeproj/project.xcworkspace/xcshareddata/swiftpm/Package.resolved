@@ -1,0 +1,16 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "WitKit",
+        "repositoryURL": "https://github.com/asielcabrera/WitKit",
+        "state": {
+          "branch": "main",
+          "revision": "40514f91baf44220bcb04f830a0a8a65c9af7cd7",
+          "version": null
+        }
+      }
+    ]
+  },
+  "version": 1
+}
